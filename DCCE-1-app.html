@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>DCCE 1 APP</title>
+</head>
+<body>
+	<center>
+		<h1>Ввод</h1>
+		<textarea id="in" cols="30" rows="10"></textarea>
+		<h2>Вывод</h2>
+		<textarea id="out" cols="30" rows="10"></textarea>
+		<p></p>
+		<button onclick="encrypt()">ЗаЪУЪшифровать</button>
+		<p></p>
+		<button onclick="decrypt()">РазЪУЪшифровать</button>
+	</center>
+</body>
+<script>
+	function dec2bin(dec){
+	    return (dec >>> 0).toString(2);
+	}
+	function encrypt() {
+		text = document.getElementById("in").value;
+		e = "";
+		for (var i = 0; i < text.length; i++) {
+			e = e + String(dec2bin(String(text.charCodeAt(i)))).replaceAll("0", "ъ").replaceAll("1", "У") + "Ъ";
+		}
+		document.getElementById("out").value = e;
+	}
+	function decrypt() {
+		text = document.getElementById("in").value;
+		e = "";
+		ea = text.split("Ъ");
+		for (var i = 0; i < ea.length-1; i++) {
+			e = e + String.fromCharCode(parseInt(ea[i].replaceAll("ъ", "0").replaceAll("У", "1"), 2));
+		}
+		document.getElementById("out").value = e;
+	}
+</script>
+</html>
